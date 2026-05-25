@@ -2,33 +2,9 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from '../components/Router';
 import { supabase, type Project, type Profile } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
-import { Code2, Palette, TrendingUp, ArrowLeft, ArrowDown, CheckCircle } from 'lucide-react';
+import { Code2, Palette, TrendingUp, ArrowLeft, Search, Zap, Shield, Globe } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
 import TalentCard from '../components/TalentCard';
-
-const testimonials = [
-  {
-    name: 'أمين بلحاج',
-    role: 'مبرمج',
-    city: 'الجزائر العاصمة',
-    text: 'وجدت شريكي في المشروع خلال أسبوع. الآن نعمل معاً على تطبيق للتوصيل في قسنطينة.',
-    color: 'from-teal-500 to-teal-700',
-  },
-  {
-    name: 'سارة مزهود',
-    role: 'مصممة UI/UX',
-    city: 'وهران',
-    text: 'المنصة غيّرت طريقة تفكيري في العمل الحر. أخيراً وجدت مطورين جديين يفهمون قيمة التصميم.',
-    color: 'from-rose-500 to-rose-700',
-  },
-  {
-    name: 'يوسف قرمة',
-    role: 'رائد أعمال',
-    city: 'عنابة',
-    text: 'فكرتي بقيت فكرة لسنتين. بعد شركاء النجاح بنيت الفريق في 3 أسابيع وأطلقنا المنتج.',
-    color: 'from-amber-500 to-amber-700',
-  },
-];
 
 export default function Home() {
   const { profile } = useAuth();
@@ -83,161 +59,114 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative min-h-[92vh] flex items-center bg-[#0a0f1e] text-white overflow-hidden">
-        {/* Grid background */}
-        <div
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              'linear-gradient(#14b8a6 1px, transparent 1px), linear-gradient(90deg, #14b8a6 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
-        />
-        <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-teal-600/20 blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 left-1/3 w-[400px] h-[300px] rounded-full bg-teal-400/10 blur-[100px] pointer-events-none" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Content */}
-            <div>
-              <div className="inline-flex items-center gap-2 bg-teal-500/15 border border-teal-500/25 px-4 py-1.5 rounded-full text-teal-400 text-xs font-medium mb-8 tracking-wide">
-                <span className="w-1.5 h-1.5 bg-teal-400 rounded-full animate-pulse" />
-                منصة فرق العمل التقنية الجزائرية
-              </div>
-
-              <h1 className="text-5xl md:text-6xl font-bold leading-[1.1] mb-6 tracking-tight">
-                فريقك المثالي
-                <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-l from-teal-300 to-teal-500">
-                  على بُعد طلب
-                </span>
-              </h1>
-
-              <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
-                مبرمجون، مصممون، ورواد أعمال من الجزائر يبنون مشاريع حقيقية معاً. انضم وابدأ مشروعك اليوم.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-3 mb-14">
-                <button
-                  onClick={() => navigate(profile ? '/projects/new' : '/signup')}
-                  className="group flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-400 text-white px-7 py-3.5 rounded-xl font-semibold transition-all duration-200 hover:shadow-lg hover:shadow-teal-500/30 hover:-translate-y-0.5"
-                >
-                  {profile ? 'أضف مشروعك' : 'ابدأ مجاناً'}
-                  <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-                </button>
-                <button
-                  onClick={() => navigate('/projects')}
-                  className="flex items-center justify-center gap-2 border border-white/15 hover:border-white/30 bg-white/5 hover:bg-white/10 text-white px-7 py-3.5 rounded-xl font-medium transition-all duration-200"
-                >
-                  استعرض المشاريع
-                </button>
-              </div>
-
-              {/* Stats row */}
-              <div className="flex items-center gap-8 border-t border-white/10 pt-8">
-                {[
-                  { value: stats.members || '—', label: 'مطوّر ومصمم' },
-                  { value: stats.projects || '—', label: 'مشروع نشط' },
-                  { value: stats.teams || '—', label: 'فريق مشكّل' },
-                ].map((s, i) => (
-                  <div key={i}>
-                    <div className="text-2xl font-bold text-white">{s.value}</div>
-                    <div className="text-xs text-gray-500 mt-0.5">{s.label}</div>
-                  </div>
-                ))}
-              </div>
+      <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-teal-900 text-white">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-20 right-20 w-72 h-72 bg-teal-400 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-teal-600 rounded-full blur-3xl" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 bg-teal-500/20 border border-teal-500/30 px-3 py-1.5 rounded-full text-teal-300 text-sm font-medium mb-6">
+              <Zap size={14} />
+              المنصة الجزائرية الأولى لفرق العمل التقنية
             </div>
-
-            {/* Role cards */}
-            <div className="hidden lg:flex flex-col gap-4 items-end">
-              {[
-                {
-                  icon: <Code2 size={22} />,
-                  label: 'مبرمج',
-                  desc: 'React · Flutter · Node.js · Python',
-                  color: 'border-blue-500/30 bg-blue-500/10 text-blue-300',
-                  dot: 'bg-blue-400',
-                  count: '1.2k+',
-                },
-                {
-                  icon: <Palette size={22} />,
-                  label: 'مصمم',
-                  desc: 'Figma · Branding · UI/UX · Motion',
-                  color: 'border-rose-500/30 bg-rose-500/10 text-rose-300',
-                  dot: 'bg-rose-400',
-                  count: '480+',
-                },
-                {
-                  icon: <TrendingUp size={22} />,
-                  label: 'رائد أعمال',
-                  desc: 'Startups · Growth · Product · Sales',
-                  color: 'border-amber-500/30 bg-amber-500/10 text-amber-300',
-                  dot: 'bg-amber-400',
-                  count: '350+',
-                },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className={`w-full max-w-xs border rounded-2xl p-5 backdrop-blur-sm transition-transform hover:-translate-y-1 cursor-default ${item.color}`}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              ابنِ فريقك،
+              <br />
+              <span className="text-teal-400">أطلق مشروعك</span>
+            </h1>
+            <p className="text-lg text-gray-300 leading-relaxed mb-8 max-w-2xl">
+              شركاء النجاح تجمع المبرمجين، المصممين، ورواد الأعمال الجزائريين في منصة واحدة لبناء مشاريع تقنية ناجحة معاً.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              {profile ? (
+                <button
+                  onClick={() => navigate('/projects/new')}
+                  className="flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-400 text-white px-6 py-3 rounded-xl font-medium transition-all hover:shadow-lg hover:shadow-teal-500/25"
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center gap-2.5">
-                      {item.icon}
-                      <span className="font-semibold text-sm">{item.label}</span>
-                    </div>
-                    <span className="flex items-center gap-1 text-[11px] bg-white/10 px-2 py-0.5 rounded-full">
-                      <span className={`w-1.5 h-1.5 rounded-full ${item.dot} animate-pulse`} />
-                      متاح
-                    </span>
-                  </div>
-                  <p className="text-xs opacity-60 leading-relaxed">{item.desc}</p>
-                  <p className="text-xl font-bold mt-3">{item.count}</p>
-                </div>
-              ))}
+                  أضف مشروعك
+                  <ArrowLeft size={18} />
+                </button>
+              ) : (
+                <button
+                  onClick={() => navigate('/signup')}
+                  className="flex items-center justify-center gap-2 bg-teal-500 hover:bg-teal-400 text-white px-6 py-3 rounded-xl font-medium transition-all hover:shadow-lg hover:shadow-teal-500/25"
+                >
+                  انضم مجاناً
+                  <ArrowLeft size={18} />
+                </button>
+              )}
+              <button
+                onClick={() => navigate('/projects')}
+                className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white px-6 py-3 rounded-xl font-medium transition-all"
+              >
+                <Search size={18} />
+                استكشف المشاريع
+              </button>
             </div>
           </div>
 
-          {/* Scroll cue */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-gray-600 text-xs animate-bounce">
-            <ArrowDown size={16} />
+          {/* Stats */}
+          <div className="mt-16 grid grid-cols-3 gap-6 max-w-lg">
+            {[
+              { value: stats.members || '...', label: 'عضو مسجّل' },
+              { value: stats.projects || '...', label: 'مشروع نشط' },
+              { value: stats.teams || '...', label: 'فريق مشكّل' },
+            ].map((stat, i) => (
+              <div key={i} className="text-center">
+                <div className="text-3xl font-bold text-teal-400">{stat.value}</div>
+                <div className="text-sm text-gray-400 mt-1">{stat.label}</div>
+              </div>
+            ))}
           </div>
+        </div>
+
+        {/* Role cards floating */}
+        <div className="hidden lg:block absolute left-8 top-1/2 -translate-y-1/2 space-y-3">
+          {[
+            { icon: <Code2 size={20} />, label: 'مبرمج', color: 'from-blue-500/20 to-blue-600/20 border-blue-500/30 text-blue-300' },
+            { icon: <Palette size={20} />, label: 'مصمم', color: 'from-rose-500/20 to-rose-600/20 border-rose-500/30 text-rose-300' },
+            { icon: <TrendingUp size={20} />, label: 'رائد أعمال', color: 'from-amber-500/20 to-amber-600/20 border-amber-500/30 text-amber-300' },
+          ].map((item, i) => (
+            <div key={i} className={`flex items-center gap-2 bg-gradient-to-r ${item.color} border rounded-xl px-4 py-3 backdrop-blur-sm`}>
+              {item.icon}
+              <span className="text-sm font-medium">{item.label}</span>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <span className="text-teal-600 text-xs font-bold tracking-widest uppercase">كيف تعمل المنصة</span>
-            <h2 className="text-3xl font-bold text-gray-900 mt-2">ثلاث خطوات للبدء</h2>
+      {/* Features */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">لماذا شركاء النجاح؟</h2>
+            <p className="text-gray-500">كل ما تحتاجه لبناء فريق عمل ناجح</p>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-2 relative">
-            <div className="hidden md:block absolute top-10 right-[16.6%] left-[16.6%] h-px bg-gradient-to-l from-gray-200 via-teal-300 to-gray-200" />
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                num: '01',
-                title: 'أنشئ ملفك الشخصي',
-                desc: 'أضف مهاراتك وخبراتك وما تبحث عنه في فريق العمل المثالي.',
+                icon: <Globe size={24} className="text-teal-600" />,
+                title: 'مجتمع جزائري',
+                desc: 'تواصل مع الكفاءات الجزائرية المحلية التي تفهم السوق وتشاركك الطموح.'
               },
               {
-                num: '02',
-                title: 'انشر مشروعك أو تصفّح',
-                desc: 'شارك فكرتك وحدد الأدوار التي تحتاجها، أو ابحث في مشاريع موجودة.',
+                icon: <Shield size={24} className="text-teal-600" />,
+                title: 'فرق متكاملة',
+                desc: 'أنشئ فريقاً متوازناً يضم المهارات التقنية والإبداعية وخبرات الأعمال.'
               },
               {
-                num: '03',
-                title: 'ابنِ فريقك وانطلق',
-                desc: 'تواصل مع الكفاءات المناسبة وابدأ العمل بفريق متكامل.',
+                icon: <Zap size={24} className="text-teal-600" />,
+                title: 'إطلاق سريع',
+                desc: 'من الفكرة إلى المنتج بسرعة أكبر بفضل الفريق المناسب والأدوات الصحيحة.'
               },
-            ].map((step, i) => (
-              <div key={i} className="relative flex flex-col items-center text-center px-6 py-8">
-                <div className="relative z-10 w-20 h-20 bg-white border-2 border-gray-100 rounded-2xl flex items-center justify-center mb-6 shadow-sm">
-                  <span className="text-3xl font-black text-teal-500/30 absolute select-none">{step.num}</span>
-                  <CheckCircle size={20} className="text-teal-600 relative z-10" />
+            ].map((feature, i) => (
+              <div key={i} className="p-6 rounded-2xl border border-gray-100 hover:border-teal-200 hover:shadow-sm transition-all">
+                <div className="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center mb-4">
+                  {feature.icon}
                 </div>
-                <h3 className="font-bold text-gray-900 text-base mb-2">{step.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{step.desc}</p>
+                <h3 className="font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{feature.desc}</p>
               </div>
             ))}
           </div>
@@ -248,13 +177,13 @@ export default function Home() {
       {featuredProjects.length > 0 && (
         <section className="py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-10">
+            <div className="flex items-center justify-between mb-8">
               <div>
-                <span className="text-teal-600 text-xs font-bold tracking-widest uppercase">المشاريع</span>
-                <h2 className="text-2xl font-bold text-gray-900 mt-1">مشاريع تبحث عن شركاء</h2>
+                <h2 className="text-2xl font-bold text-gray-900">مشاريع تبحث عن شركاء</h2>
+                <p className="text-gray-500 text-sm mt-1">انضم لفريق يعمل على مشروع مثير</p>
               </div>
-              <Link href="/projects" className="text-sm font-medium text-gray-500 hover:text-teal-600 flex items-center gap-1 transition-colors">
-                عرض الكل <ArrowLeft size={14} />
+              <Link href="/projects" className="text-teal-600 hover:text-teal-700 text-sm font-medium flex items-center gap-1 transition-colors">
+                عرض الكل <ArrowLeft size={15} />
               </Link>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -266,44 +195,17 @@ export default function Home() {
         </section>
       )}
 
-      {/* Testimonials */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-teal-600 text-xs font-bold tracking-widest uppercase">آراء المجتمع</span>
-            <h2 className="text-2xl font-bold text-gray-900 mt-2">من واقع تجربة أعضائنا</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <div key={i} className="relative bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:border-teal-200 transition-colors">
-                <div className="text-5xl text-gray-200 font-serif absolute top-3 right-5 select-none leading-none">"</div>
-                <p className="text-gray-700 text-sm leading-relaxed mt-4 mb-6 relative">{t.text}</p>
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${t.color} flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
-                    {t.name.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900 text-sm">{t.name}</p>
-                    <p className="text-xs text-gray-400">{t.role} · {t.city}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Featured Talent */}
       {featuredTalent.length > 0 && (
-        <section className="py-16 bg-gray-50">
+        <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between mb-10">
+            <div className="flex items-center justify-between mb-8">
               <div>
-                <span className="text-teal-600 text-xs font-bold tracking-widest uppercase">الكفاءات</span>
-                <h2 className="text-2xl font-bold text-gray-900 mt-1">كفاءات متاحة الآن</h2>
+                <h2 className="text-2xl font-bold text-gray-900">كفاءات متاحة للانضمام</h2>
+                <p className="text-gray-500 text-sm mt-1">اعثر على الشريك المثالي لمشروعك</p>
               </div>
-              <Link href="/talent" className="text-sm font-medium text-gray-500 hover:text-teal-600 flex items-center gap-1 transition-colors">
-                عرض الكل <ArrowLeft size={14} />
+              <Link href="/talent" className="text-teal-600 hover:text-teal-700 text-sm font-medium flex items-center gap-1 transition-colors">
+                عرض الكل <ArrowLeft size={15} />
               </Link>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -315,33 +217,21 @@ export default function Home() {
         </section>
       )}
 
-      {/* CTA banner */}
-      <section className="py-24 bg-[#0a0f1e] relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage:
-              'linear-gradient(#14b8a6 1px, transparent 1px), linear-gradient(90deg, #14b8a6 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
-        />
-        <div className="absolute top-0 right-1/2 translate-x-1/2 w-[600px] h-[300px] bg-teal-500/15 blur-[100px] rounded-full pointer-events-none" />
-        <div className="relative max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-white mb-4 leading-tight">
-            فكرتك تستحق فريقاً يُؤمن بها
-          </h2>
-          <p className="text-gray-400 text-lg mb-10">انضم للمجتمع واعثر على شركائك في الجزائر</p>
+      {/* CTA */}
+      <section className="py-20 bg-gradient-to-r from-teal-600 to-teal-800">
+        <div className="max-w-4xl mx-auto px-4 text-center text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">جاهز لإطلاق مشروعك؟</h2>
+          <p className="text-teal-100 text-lg mb-8">انضم لآلاف الكفاءات الجزائرية وابدأ رحلتك اليوم</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={() => navigate(profile ? '/projects/new' : '/signup')}
-              className="group bg-teal-500 hover:bg-teal-400 text-white px-8 py-4 rounded-xl font-semibold transition-all hover:shadow-lg hover:shadow-teal-500/30 flex items-center justify-center gap-2"
+              className="bg-white text-teal-700 hover:bg-teal-50 px-8 py-3 rounded-xl font-semibold transition-colors"
             >
               {profile ? 'أنشئ مشروعاً' : 'سجل الآن مجاناً'}
-              <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
             </button>
             <button
               onClick={() => navigate('/talent')}
-              className="border border-white/20 hover:border-white/40 text-white hover:bg-white/5 px-8 py-4 rounded-xl font-medium transition-all"
+              className="border border-white/40 text-white hover:bg-white/10 px-8 py-3 rounded-xl font-medium transition-colors"
             >
               استعرض الكفاءات
             </button>

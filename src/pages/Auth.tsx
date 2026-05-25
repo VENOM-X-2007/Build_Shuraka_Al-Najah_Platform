@@ -43,7 +43,7 @@ export function LoginPage() {
     setError('');
     const { error } = await signIn(email, password);
     if (error) {
-      setError('البريد الإلكتروني أو كلمة المرور غير صحيحة');
+      setError('بريد إلكتروني أو كلمة مرور غير صحيحة');
     } else {
       navigate('/');
     }
@@ -51,79 +51,44 @@ export function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0f1e] flex items-stretch">
-      {/* Left decorative panel */}
-      <div className="hidden lg:flex flex-col justify-between w-[420px] p-10 border-l border-white/5 relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage: 'linear-gradient(#14b8a6 1px, transparent 1px), linear-gradient(90deg, #14b8a6 1px, transparent 1px)',
-            backgroundSize: '50px 50px',
-          }}
-        />
-        <div className="relative">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 bg-teal-500 rounded-xl flex items-center justify-center">
-              <Users size={17} className="text-white" />
-            </div>
-            <span className="text-white font-bold text-[15px]">شركاء النجاح</span>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-teal-50 flex items-center justify-center px-4 py-16">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-teal-600 rounded-2xl mb-4 shadow-lg">
+            <Users size={28} className="text-white" />
           </div>
+          <h1 className="text-2xl font-bold text-gray-900">مرحباً بعودتك</h1>
+          <p className="text-gray-500 mt-1">سجّل دخولك للمتابعة</p>
         </div>
-        <div className="relative space-y-4">
-          {[
-            { role: 'مبرمج', name: 'أمين بلحاج', city: 'الجزائر العاصمة', color: 'bg-blue-500/20 border-blue-500/30 text-blue-300' },
-            { role: 'مصممة', name: 'سارة مزهود', city: 'وهران', color: 'bg-rose-500/20 border-rose-500/30 text-rose-300' },
-            { role: 'رائد أعمال', name: 'يوسف قرمة', city: 'عنابة', color: 'bg-amber-500/20 border-amber-500/30 text-amber-300' },
-          ].map((u, i) => (
-            <div key={i} className={`flex items-center gap-3 border rounded-xl px-4 py-3 ${u.color}`}>
-              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold">
-                {u.name.charAt(0)}
-              </div>
-              <div>
-                <p className="text-xs font-semibold">{u.name}</p>
-                <p className="text-[10px] opacity-60">{u.role} · {u.city}</p>
-              </div>
-            </div>
-          ))}
-          <p className="text-xs text-gray-600 text-center pt-2">+ مئات آخرون ينتظرون شريكهم</p>
-        </div>
-      </div>
 
-      {/* Form */}
-      <div className="flex-1 flex items-center justify-center px-4 py-16">
-        <div className="w-full max-w-sm">
-          <div className="mb-8">
-            <h1 className="text-2xl font-bold text-white mb-1">مرحباً بعودتك</h1>
-            <p className="text-gray-500 text-sm">سجّل دخولك للمتابعة</p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">البريد الإلكتروني</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">البريد الإلكتروني</label>
               <input
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all text-sm"
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 outline-none transition-all text-sm"
                 placeholder="you@example.com"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">كلمة المرور</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">كلمة المرور</label>
               <div className="relative">
                 <input
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={e => setPassword(e.target.value)}
                   required
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all text-sm pl-10"
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 outline-none transition-all text-sm pl-10"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -131,7 +96,7 @@ export function LoginPage() {
             </div>
 
             {error && (
-              <div className="bg-red-500/10 text-red-400 text-sm px-4 py-2.5 rounded-xl border border-red-500/20">
+              <div className="bg-red-50 text-red-600 text-sm px-4 py-2.5 rounded-xl border border-red-100">
                 {error}
               </div>
             )}
@@ -139,16 +104,16 @@ export function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-teal-500 hover:bg-teal-400 text-white py-3 rounded-xl font-semibold transition-all hover:shadow-lg hover:shadow-teal-500/25 flex items-center justify-center gap-2 disabled:opacity-50 mt-2"
+              className="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-60"
             >
               {loading ? <Loader2 size={18} className="animate-spin" /> : null}
               {loading ? 'جارٍ الدخول...' : 'دخول'}
             </button>
           </form>
 
-          <p className="text-center text-sm text-gray-600 mt-6">
+          <p className="text-center text-sm text-gray-500 mt-6">
             ليس لديك حساب؟{' '}
-            <button onClick={() => navigate('/signup')} className="text-teal-400 hover:text-teal-300 font-semibold transition-colors">
+            <button onClick={() => navigate('/signup')} className="text-teal-600 hover:text-teal-700 font-medium">
               سجّل الآن
             </button>
           </p>
@@ -188,62 +153,51 @@ export function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0f1e] flex items-center justify-center px-4 py-16 relative overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-[0.05]"
-        style={{
-          backgroundImage: 'linear-gradient(#14b8a6 1px, transparent 1px), linear-gradient(90deg, #14b8a6 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-        }}
-      />
-      <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-teal-600/10 blur-[100px] pointer-events-none" />
-      <div className="relative w-full max-w-md">
-        <div className="mb-8">
-          <div className="flex items-center gap-2.5 mb-6">
-            <div className="w-9 h-9 bg-teal-500 rounded-xl flex items-center justify-center">
-              <Users size={17} className="text-white" />
-            </div>
-            <span className="text-white font-bold text-[15px]">شركاء النجاح</span>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-teal-50 flex items-center justify-center px-4 py-16">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-teal-600 rounded-2xl mb-4 shadow-lg">
+            <Users size={28} className="text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-white mb-1">انضم لمجتمعنا</h1>
-          <p className="text-gray-500 text-sm">أنشئ حسابك وابدأ رحلتك</p>
+          <h1 className="text-2xl font-bold text-gray-900">انضم لمجتمعنا</h1>
+          <p className="text-gray-500 mt-1">أنشئ حسابك وابدأ رحلتك</p>
         </div>
 
         {/* Step indicator */}
         <div className="flex items-center gap-2 mb-6">
           {[1, 2].map(s => (
-            <div key={s} className={`flex-1 h-1 rounded-full transition-all duration-300 ${s <= step ? 'bg-teal-500' : 'bg-white/10'}`} />
+            <div key={s} className={`flex-1 h-1.5 rounded-full transition-colors ${s <= step ? 'bg-teal-500' : 'bg-gray-200'}`} />
           ))}
         </div>
 
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 p-8">
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {step === 1 ? (
               <>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">الاسم الكامل</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">الاسم الكامل</label>
                   <input
                     type="text"
                     value={fullName}
                     onChange={e => setFullName(e.target.value)}
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all text-sm"
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 outline-none transition-all text-sm"
                     placeholder="أحمد محمد"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">البريد الإلكتروني</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">البريد الإلكتروني</label>
                   <input
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all text-sm"
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 outline-none transition-all text-sm"
                     placeholder="you@example.com"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">كلمة المرور</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">كلمة المرور</label>
                   <div className="relative">
                     <input
                       type={showPassword ? 'text' : 'password'}
@@ -251,13 +205,13 @@ export function SignupPage() {
                       onChange={e => setPassword(e.target.value)}
                       required
                       minLength={6}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 outline-none transition-all text-sm pl-10"
+                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 outline-none transition-all text-sm pl-10"
                       placeholder="6 أحرف على الأقل"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                     >
                       {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                     </button>
@@ -265,7 +219,7 @@ export function SignupPage() {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-teal-500 hover:bg-teal-400 text-white py-3 rounded-xl font-semibold transition-all hover:shadow-lg hover:shadow-teal-500/25 mt-2"
+                  className="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-medium transition-colors"
                 >
                   التالي
                 </button>
@@ -273,7 +227,7 @@ export function SignupPage() {
             ) : (
               <>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">ما هو دورك؟</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">ما هو دورك؟</label>
                   <div className="space-y-2.5">
                     {roles.map(role => (
                       <button
@@ -283,15 +237,15 @@ export function SignupPage() {
                         className={`w-full flex items-center gap-3 p-3.5 rounded-xl border-2 transition-all ${
                           selectedRole === role.value
                             ? `${role.color} border-current`
-                            : 'border-white/10 hover:border-white/20 text-gray-400 hover:text-gray-300'
+                            : 'border-gray-100 hover:border-gray-200 text-gray-700'
                         }`}
                       >
-                        <div className={`${selectedRole === role.value ? '' : 'text-gray-600'}`}>
+                        <div className={`${selectedRole === role.value ? '' : 'text-gray-400'}`}>
                           {role.icon}
                         </div>
                         <div className="text-right">
-                          <div className="font-semibold text-sm">{role.label}</div>
-                          <div className="text-xs opacity-60">{role.desc}</div>
+                          <div className="font-medium text-sm">{role.label}</div>
+                          <div className="text-xs opacity-70">{role.desc}</div>
                         </div>
                       </button>
                     ))}
@@ -299,7 +253,7 @@ export function SignupPage() {
                 </div>
 
                 {error && (
-                  <div className="bg-red-500/10 text-red-400 text-sm px-4 py-2.5 rounded-xl border border-red-500/20">
+                  <div className="bg-red-50 text-red-600 text-sm px-4 py-2.5 rounded-xl border border-red-100">
                     {error}
                   </div>
                 )}
@@ -308,14 +262,14 @@ export function SignupPage() {
                   <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className="flex-1 border border-white/10 text-gray-400 py-3 rounded-xl font-medium hover:bg-white/5 transition-colors"
+                    className="flex-1 border border-gray-200 text-gray-600 py-3 rounded-xl font-medium hover:bg-gray-50 transition-colors"
                   >
                     رجوع
                   </button>
                   <button
                     type="submit"
                     disabled={loading}
-                    className="flex-1 bg-teal-500 hover:bg-teal-400 text-white py-3 rounded-xl font-semibold transition-all hover:shadow-lg hover:shadow-teal-500/25 flex items-center justify-center gap-2 disabled:opacity-50"
+                    className="flex-1 bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-xl font-medium transition-colors flex items-center justify-center gap-2 disabled:opacity-60"
                   >
                     {loading ? <Loader2 size={18} className="animate-spin" /> : null}
                     {loading ? 'جارٍ التسجيل...' : 'إنشاء الحساب'}
@@ -326,9 +280,9 @@ export function SignupPage() {
           </form>
 
           {step === 1 && (
-            <p className="text-center text-sm text-gray-600 mt-6">
+            <p className="text-center text-sm text-gray-500 mt-6">
               لديك حساب بالفعل؟{' '}
-              <button onClick={() => navigate('/login')} className="text-teal-400 hover:text-teal-300 font-semibold transition-colors">
+              <button onClick={() => navigate('/login')} className="text-teal-600 hover:text-teal-700 font-medium">
                 سجّل دخولك
               </button>
             </p>

@@ -14,10 +14,17 @@
   body {
     direction: rtl;
     text-align: right;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   input, textarea, select {
     text-align: right;
+  }
+
+  ::selection {
+    background-color: #99f6e4;
+    color: #134e4a;
   }
 }
 
@@ -35,4 +42,72 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
+}
+
+@layer components {
+  /* Fade in upward */
+  .animate-fade-up {
+    animation: fadeUp 0.4s ease-out forwards;
+  }
+
+  /* Staggered card entrance */
+  .animate-in {
+    animation: fadeInDown 0.2s ease-out forwards;
+  }
+
+  .fade-in {
+    animation: opacityIn 0.15s ease-out forwards;
+  }
+
+  .slide-in-from-top-2 {
+    animation: slideFromTop 0.15s ease-out forwards;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes opacityIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideFromTop {
+  from { transform: translateY(-6px); }
+  to   { transform: translateY(0); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
 }
